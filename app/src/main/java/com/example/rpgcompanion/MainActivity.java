@@ -3,14 +3,17 @@ package com.example.rpgcompanion;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
+import com.example.rpgcompanion.fragmentos.FichaDetalheFragment;
 import com.example.rpgcompanion.fragmentos.FichaListaFragment;
+import com.example.rpgcompanion.model.Ficha;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FichaListaFragment.AoClicarNaFicha {
 
     private FichaListaFragment fichaListaFragment;
     private FragmentManager mFragmentManager;
@@ -48,5 +51,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public void clicouNaFicha(Ficha ficha) {
+        Intent it = new Intent(this, FichaDetalheActivity.class);
+        it.putExtra(FichaDetalheFragment.FICHA, ficha);
+        startActivity(it);
     }
 }

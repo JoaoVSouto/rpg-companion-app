@@ -1,11 +1,14 @@
 package com.example.rpgcompanion.fragmentos;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.ListFragment;
 
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.example.rpgcompanion.model.Ficha;
 
@@ -37,6 +40,20 @@ public class FichaListaFragment extends ListFragment {
         fichas.add(new Ficha("Ayla", "Elfo", "Mago", 2, 4, 5, 9));
 
         return fichas;
+    }
+
+    @Override
+    public void onListItemClick(@NonNull ListView l, @NonNull View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        Activity activity = getActivity();
+
+        if (activity instanceof AoClicarNaFicha) {
+            Ficha ficha = (Ficha) l.getItemAtPosition(position);
+
+            AoClicarNaFicha listener = (AoClicarNaFicha) activity;
+            listener.clicouNaFicha(ficha);
+        }
     }
 
     public void buscar(String newText) {
@@ -72,6 +89,10 @@ public class FichaListaFragment extends ListFragment {
         );
 
         setListAdapter(mAdapter);
+    }
+
+    public interface AoClicarNaFicha {
+        void clicouNaFicha(Ficha ficha);
     }
 
 }
