@@ -3,13 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto" >
 
+
     <item
         android:id="@+id/acao_pesquisar"
         android:title="Pesquisar"
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="android.widget.SearchView" />
-
+    <item
+        android:id="@+id/dados_item"
+        android:icon="@drawable/ic_casino"
+        android:title="Dados"
+        app:showAsAction="always"/>
     <!--    <item-->
     <!--        android:id="@+id/acao_info"-->
     <!--        android:title="@string/acao_info"-->

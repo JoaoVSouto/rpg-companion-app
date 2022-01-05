@@ -1,5 +1,6 @@
 package com.example.rpgcompanion;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -51,6 +52,16 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
         });
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.dados_item:
+                Intent it = new Intent(this,DadosActivity.class);
+                startActivity(it);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
