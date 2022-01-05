@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.rpgcompanion.fragmentos.DadoDialogFragment;
+
 import java.util.Random;
 
 public class DadosActivity extends AppCompatActivity {
@@ -68,5 +70,7 @@ public class DadosActivity extends AppCompatActivity {
 
     private void rolarDado(int lados){
         int resultado = new Random().nextInt(lados)+1;
+        DadoDialogFragment dadoDialogFragment = new DadoDialogFragment().newInstance(lados,resultado);
+        dadoDialogFragment.show(getSupportFragmentManager(),"DadoResultado");
     }
 }
