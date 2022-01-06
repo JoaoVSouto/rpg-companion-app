@@ -4,20 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/drawable/ic_launcher_background.xml" value="0.36041666666666666" />
+        <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_dados.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_ficha_detalhe.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_home.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_main.xml" value="0.3302083333333333" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/fragment_ficha_detalhe.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/fragment_ficha_lista.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/menu/menu.xml" value="0.34427083333333336" />
-        <entry key="..\:/UFRN/P6/Moveis/AndroidProjects/rpg-companion-app/app/src/main/res/layout/activity_dados.xml" value="0.3625" />
-        <entry key="..\:/UFRN/P6/Moveis/AndroidProjects/rpg-companion-app/app/src/main/res/layout/activity_ficha_detalhe.xml" value="0.2857789855072464" />
-        <entry key="..\:/UFRN/P6/Moveis/AndroidProjects/rpg-companion-app/app/src/main/res/layout/activity_home.xml" value="0.2857789855072464" />
-        <entry key="..\:/UFRN/P6/Moveis/AndroidProjects/rpg-companion-app/app/src/main/res/layout/activity_main.xml" value="0.2857789855072464" />
-        <entry key="..\:/UFRN/P6/Moveis/AndroidProjects/rpg-companion-app/app/src/main/res/layout/fragment_dado_dialog.xml" value="0.24320652173913043" />
-        <entry key="..\:/UFRN/P6/Moveis/AndroidProjects/rpg-companion-app/app/src/main/res/layout/fragment_ficha_detalhe.xml" value="0.2857789855072464" />
-        <entry key="..\:/UFRN/P6/Moveis/AndroidProjects/rpg-companion-app/app/src/main/res/layout/fragment_ficha_lista.xml" value="0.2857789855072464" />
-        <entry key="..\:/UFRN/P6/Moveis/AndroidProjects/rpg-companion-app/app/src/main/res/menu/menu.xml" value="0.33" />
       </map>
     </option>
   </component>
