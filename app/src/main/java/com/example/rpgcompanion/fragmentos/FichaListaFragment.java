@@ -56,6 +56,11 @@ public class FichaListaFragment extends ListFragment {
         }
     }
 
+    public void adicionar(Ficha ficha) {
+        mFichas.add(ficha);
+        mAdapter.notifyDataSetChanged();
+    }
+
     public void buscar(String newText) {
         if (newText == null || newText.trim().equals("")) {
             limpaBusca();
