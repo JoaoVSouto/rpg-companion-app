@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RPGCompanion">
         <activity
+            android:name=".CriacaoFichaActivity"
+            android:exported="false" />
+        <activity
             android:name=".DadosActivity"
             android:exported="false" />
         <activity
