@@ -35,19 +35,23 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn4"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:layout_marginHorizontal="8dp"
-                android:text="D4" />
+                android:text="D4"
+                android:background="@color/beige"
+                app:srcCompat="@drawable/dice_d4"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn6"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:layout_marginHorizontal="8dp"
-                android:text="D6" />
+                android:text="D6"
+                android:background="@color/beige"
+                app:srcCompat="@drawable/dice_d6"/>
         </TableRow>
 
         <TableRow
@@ -55,19 +59,23 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn8"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:layout_marginHorizontal="8dp"
-                android:text="D8" />
+                android:text="D8"
+                android:background="@color/beige"
+                app:srcCompat="@drawable/dice_d8"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn10"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:layout_marginHorizontal="8dp"
-                android:text="D10" />
+                android:text="D10"
+                android:background="@color/beige"
+                app:srcCompat="@drawable/dice_d10"/>
         </TableRow>
 
         <TableRow
@@ -75,19 +83,23 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn12"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:layout_marginHorizontal="8dp"
-                android:text="D12" />
+                android:text="D12"
+                android:background="@color/beige"
+                app:srcCompat="@drawable/dice_d12"/>
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn20"
                 android:layout_width="128dp"
                 android:layout_height="128dp"
                 android:layout_marginHorizontal="8dp"
-                android:text="D20" />
+                android:text="D20"
+                android:background="@color/beige"
+                app:srcCompat="@drawable/dice_d20"/>
         </TableRow>
 
     </TableLayout>

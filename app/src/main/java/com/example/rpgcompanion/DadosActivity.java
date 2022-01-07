@@ -2,9 +2,11 @@ package com.example.rpgcompanion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import com.example.rpgcompanion.fragmentos.DadoDialogFragment;
 
@@ -12,12 +14,12 @@ import java.util.Random;
 
 public class DadosActivity extends AppCompatActivity {
 
-    Button btn4;
-    Button btn6;
-    Button btn8;
-    Button btn10;
-    Button btn12;
-    Button btn20;
+    ImageButton btn4;
+    ImageButton btn6;
+    ImageButton btn8;
+    ImageButton btn10;
+    ImageButton btn12;
+    ImageButton btn20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
