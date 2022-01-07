@@ -15,10 +15,10 @@
         android:icon="@drawable/ic_casino"
         android:title="Dados"
         app:showAsAction="always"/>
-    <!--    <item-->
-    <!--        android:id="@+id/acao_info"-->
-    <!--        android:title="@string/acao_info"-->
-    <!--        android:icon="@android:drawable/ic_menu_info_details"-->
-    <!--        app:showAsAction="never"/>-->
+    <item
+        android:id="@+id/acao_info"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:title="Info"
+        app:showAsAction="always"/>
 
 </menu>

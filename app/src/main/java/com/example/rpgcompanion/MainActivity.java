@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,11 +17,14 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.rpgcompanion.fragmentos.DadoDialogFragment;
 import com.example.rpgcompanion.fragmentos.FichaDetalheFragment;
 import com.example.rpgcompanion.fragmentos.FichaListaFragment;
+import com.example.rpgcompanion.fragmentos.InfoDialogFragment;
 import com.example.rpgcompanion.model.Ficha;
 
-public class MainActivity extends AppCompatActivity implements FichaListaFragment.AoClicarNaFicha {
+public class MainActivity extends AppCompatActivity implements FichaListaFragment.AoClicarNaFicha,
+        InfoDialogFragment.AoClicarEmInfo {
 
     private FichaListaFragment fichaListaFragment;
     private FragmentManager mFragmentManager;
@@ -77,6 +82,11 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
             case R.id.dados_item:
                 Intent it = new Intent(this,DadosActivity.class);
                 startActivity(it);
+                break;
+            case R.id.acao_info:
+                InfoDialogFragment infoDialogFragment = new InfoDialogFragment();
+                infoDialogFragment.show(mFragmentManager,"INFO");
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -97,5 +107,14 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
         Intent it = new Intent(this, FichaDetalheActivity.class);
         it.putExtra(FichaDetalheFragment.FICHA, ficha);
         startActivity(it);
+    }
+
+    @Override
+    public void aoClicar(int botao) {
+        if(botao == DialogInterface.BUTTON_POSITIVE){
+            Intent it = new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://github.com/JoaoVSouto/rpg-companion-app"));
+            startActivity(it);
+        }
     }
 }
