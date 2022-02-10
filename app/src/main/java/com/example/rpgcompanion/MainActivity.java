@@ -87,6 +87,10 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
                 InfoDialogFragment infoDialogFragment = new InfoDialogFragment();
                 infoDialogFragment.show(mFragmentManager,"INFO");
                 break;
+            case R.id.bestiario:
+                Intent it2 = new Intent(this,BestiarioActivity.class);
+                startActivity(it2);
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
