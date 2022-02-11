@@ -7,8 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.ListFragment;
 
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.rpgcompanion.model.Ficha;
 
@@ -26,20 +28,30 @@ public class FichaListaFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mFichas = carregaFichas();
+        mFichas = new ArrayList<>();
 
         limpaBusca();
     }
 
-    @NonNull
-    private List<Ficha> carregaFichas() {
-        List<Ficha> fichas = new ArrayList<>();
+    @Override
+    public void onStart() {
+        super.onStart();
 
-        fichas.add(new Ficha("Trogdor", "Troll", "Bárbaro", 9, 4, 5, 2));
-        fichas.add(new Ficha("Jon Snow", "Humano", "Lutador", 6, 6, 6, 6));
-        fichas.add(new Ficha("Ayla", "Elfo", "Mago", 2, 4, 5, 9));
+        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Activity activity = getActivity();
 
-        return fichas;
+                if (activity instanceof AoClicarNaFicha) {
+                    Ficha ficha = (Ficha) parent.getItemAtPosition(position);
+
+                    AoClicarNaFicha listener = (AoClicarNaFicha) activity;
+                    listener.pressionouFicha(ficha);
+                }
+
+                return true;
+            }
+        });
     }
 
     @Override
@@ -56,8 +68,11 @@ public class FichaListaFragment extends ListFragment {
         }
     }
 
-    public void adicionar(Ficha ficha) {
-        mFichas.add(ficha);
+    public void setarFichas(List<Ficha> fichas) {
+        mFichas.clear();
+        for (int i = 0; i < fichas.size(); i++) {
+            mFichas.add(fichas.get(i));
+        }
         mAdapter.notifyDataSetChanged();
     }
 
@@ -98,6 +113,7 @@ public class FichaListaFragment extends ListFragment {
 
     public interface AoClicarNaFicha {
         void clicouNaFicha(Ficha ficha);
+        void pressionouFicha(Ficha ficha);
     }
 
 }

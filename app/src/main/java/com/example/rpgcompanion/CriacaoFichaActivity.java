@@ -11,8 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.rpgcompanion.dao.FichaDAO;
 import com.example.rpgcompanion.model.Ficha;
 
 public class CriacaoFichaActivity extends AppCompatActivity {
@@ -25,6 +27,9 @@ public class CriacaoFichaActivity extends AppCompatActivity {
     EditText etConstitution;
     EditText etIntelligence;
     Button btnCreate;
+    TextView tvCreateEditTitle;
+
+    Ficha fichaAtual;
 
     private static final String[] races = {"", "Troll", "Elfo", "Humano", "Anão", "Gnomo", "Ogro"};
     private static final String[] classes = {"", "Bárbaro", "Lutador", "Mago", "Feiticeiro", "Bardo", "Druida"};
@@ -48,6 +53,27 @@ public class CriacaoFichaActivity extends AppCompatActivity {
         etConstitution = findViewById(R.id.etConstitution);
         etIntelligence = findViewById(R.id.etIntelligence);
         btnCreate = findViewById(R.id.btnCreate);
+        tvCreateEditTitle = findViewById(R.id.tvCreateEditTitle);
+
+        Intent it = getIntent();
+
+        try {
+            fichaAtual = (Ficha) it.getExtras().getSerializable("ficha");
+            tvCreateEditTitle.setText("Edição de ficha");
+        } catch (Exception e) {
+            tvCreateEditTitle.setText("Criação de ficha");
+            fichaAtual = null;
+        }
+
+        if (fichaAtual != null) {
+            etName.setText(fichaAtual.getNome());
+            spnRace.setSelection(findIndex(races, fichaAtual.getRaca()));
+            spnClass.setSelection(findIndex(classes, fichaAtual.getClasse()));
+            etForce.setText(String.valueOf(fichaAtual.getForca()));
+            etDexterity.setText(String.valueOf(fichaAtual.getDestreza()));
+            etConstitution.setText(String.valueOf(fichaAtual.getConstituicao()));
+            etIntelligence.setText(String.valueOf(fichaAtual.getInteligencia()));
+        }
 
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +82,16 @@ public class CriacaoFichaActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private int findIndex(String[] array, String string) {
+        for (int i = 0; i < array.length; i++) {
+            if (string.equals(array[i])) {
+                return i;
+            }
+        }
+
+        return 0;
     }
 
     private void createError(String message) {
@@ -120,7 +156,26 @@ public class CriacaoFichaActivity extends AppCompatActivity {
                 return;
             }
 
-            Ficha ficha = new Ficha(
+            FichaDAO fichaDAO = new FichaDAO(getApplicationContext());
+
+            if (fichaAtual != null) {
+                fichaAtual.setNome(selectedName);
+                fichaAtual.setRaca(selectedRace);
+                fichaAtual.setClasse(selectedClass);
+                fichaAtual.setForca(selectedForce);
+                fichaAtual.setDestreza(selectedDexterity);
+                fichaAtual.setConstituicao(selectedConstitution);
+                fichaAtual.setInteligencia(selectedIntelligence);
+
+                if (fichaDAO.update(fichaAtual)) {
+                    Toast.makeText(getApplicationContext(), "Ficha atualizada!", Toast.LENGTH_SHORT).show();
+                    finish();
+                    return;
+                } else {
+                    Toast.makeText(getApplicationContext(), "Erro ao atualizar...", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Ficha ficha = new Ficha(
                     selectedName,
                     selectedRace,
                     selectedClass,
@@ -128,12 +183,16 @@ public class CriacaoFichaActivity extends AppCompatActivity {
                     selectedDexterity,
                     selectedConstitution,
                     selectedIntelligence
-            );
+                );
 
-            Intent intent = new Intent();
-            intent.putExtra("ficha", ficha);
-            setResult(RESULT_OK, intent);
-            finish();
+                if (fichaDAO.create(ficha)) {
+                    Toast.makeText(getApplicationContext(), "Ficha criada!", Toast.LENGTH_SHORT).show();
+                    finish();
+                    return;
+                } else {
+                    Toast.makeText(getApplicationContext(), "Erro ao criar...", Toast.LENGTH_SHORT).show();
+                }
+            }
         } catch (Exception e) {
             createError("Algum erro ocorreu. Revise seus dados!");
         }

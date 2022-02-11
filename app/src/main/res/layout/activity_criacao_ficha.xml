@@ -8,7 +8,7 @@ android:background="@color/beige"
 tools:context=".CriacaoFichaActivity">
 
 <TextView
-    android:id="@+id/textView"
+    android:id="@+id/tvCreateEditTitle"
     android:layout_width="match_parent"
     android:layout_height="46dp"
     android:layout_marginTop="32dp"

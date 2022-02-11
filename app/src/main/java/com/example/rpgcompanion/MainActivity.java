@@ -2,6 +2,7 @@ package com.example.rpgcompanion;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
@@ -17,6 +18,7 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.example.rpgcompanion.dao.FichaDAO;
 import com.example.rpgcompanion.fragmentos.DadoDialogFragment;
 import com.example.rpgcompanion.fragmentos.FichaDetalheFragment;
 import com.example.rpgcompanion.fragmentos.FichaListaFragment;
@@ -29,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
     private FichaListaFragment fichaListaFragment;
     private FragmentManager mFragmentManager;
     private Button btnCriarFicha;
-
-    private final static int CRIACAO_FICHA_REQUEST_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, CriacaoFichaActivity.class);
-                startActivityForResult(intent, CRIACAO_FICHA_REQUEST_CODE);
+                startActivity(intent);
             }
         });
     }
@@ -96,29 +96,55 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void clicouNaFicha(Ficha ficha) {
+        Intent intent = new Intent(MainActivity.this, CriacaoFichaActivity.class);
+        intent.putExtra("ficha", ficha);
 
-        if (resultCode == Activity.RESULT_OK && requestCode == CRIACAO_FICHA_REQUEST_CODE && data != null) {
-            Ficha ficha = (Ficha) data.getSerializableExtra("ficha");
-            fichaListaFragment.adicionar(ficha);
-            Toast.makeText(getApplicationContext(), "Ficha criada com sucesso!", Toast.LENGTH_SHORT).show();
-        }
+        startActivity(intent);
     }
 
     @Override
-    public void clicouNaFicha(Ficha ficha) {
-        Intent it = new Intent(this, FichaDetalheActivity.class);
-        it.putExtra(FichaDetalheFragment.FICHA, ficha);
-        startActivity(it);
+    public void pressionouFicha(Ficha ficha) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+
+        builder.setTitle("Confirmar exclusão:");
+        builder.setMessage("Deseja excluir a ficha: " + ficha.getNome() + "?");
+        builder.setPositiveButton("Excluir", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                FichaDAO fichaDAO = new FichaDAO(getApplicationContext());
+
+                if (fichaDAO.delete(ficha)) {
+                    Toast.makeText(getApplicationContext(), "Ficha removida!", Toast.LENGTH_SHORT).show();
+                    carregarFichas();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Erro ao remover ficha...", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        builder.setNegativeButton("Não", null);
+
+        builder.create();
+        builder.show();
     }
 
     @Override
     public void aoClicar(int botao) {
-        if(botao == DialogInterface.BUTTON_POSITIVE){
+        if(botao == DialogInterface.BUTTON_POSITIVE) {
             Intent it = new Intent(Intent.ACTION_VIEW,
                     Uri.parse("https://github.com/JoaoVSouto/rpg-companion-app"));
             startActivity(it);
         }
+    }
+
+    public void carregarFichas() {
+        FichaDAO fichaDAO = new FichaDAO(getApplicationContext());
+        fichaListaFragment.setarFichas(fichaDAO.list());
+    }
+
+    @Override
+    protected void onStart() {
+        this.carregarFichas();
+        super.onStart();
     }
 }

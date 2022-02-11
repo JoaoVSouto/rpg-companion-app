@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Ficha implements Serializable {
 
+    private Long id;
     private String nome;
     private String raca;
     private String classe;
@@ -11,6 +12,8 @@ public class Ficha implements Serializable {
     private int destreza;
     private int constituicao;
     private int inteligencia;
+
+    public Ficha() {}
 
     public Ficha(String nome, String raca, String classe, int forca, int destreza, int constituicao, int inteligencia) {
         this.nome = nome;
@@ -83,4 +86,11 @@ public class Ficha implements Serializable {
         return nome;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
