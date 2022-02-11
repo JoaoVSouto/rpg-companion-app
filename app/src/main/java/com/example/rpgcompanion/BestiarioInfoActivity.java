@@ -5,12 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.TextView;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,42 +17,38 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 
-public class BestiarioActivity extends AppCompatActivity {
-    ListView itens;
+public class BestiarioInfoActivity extends AppCompatActivity {
+
+    TextView infoName;
+    TextView infoSize;
+    TextView infoType;
+    TextView infoHit;
+    TextView infoArmor;
+    TextView infoConstitution;
+    TextView infoIntelligence;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bestiario);
-        itens = findViewById(R.id.listaBestas);
+        setContentView(R.layout.activity_bestiario_info);
+
+        infoName = findViewById(R.id.infoName);
+        infoSize = findViewById(R.id.infoSize);
+        infoType = findViewById(R.id.infoType);
+        infoHit = findViewById(R.id.infoHit);
+        infoArmor = findViewById(R.id.infoArmor);
+        infoConstitution = findViewById(R.id.infoConstitution);
+        infoIntelligence = findViewById(R.id.infoIntelligence);
+
+        Intent it = getIntent();
+        String besta = it.getExtras().getString("besta");
 
         MinhaTarefa tarefa = new MinhaTarefa();
-        String urlApi = "https://www.dnd5eapi.co/api/monsters/";
+        String urlApi = "https://www.dnd5eapi.co/api/monsters/"+besta;
         tarefa.execute(urlApi);
-        itens.setClickable(true);
-        itens.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                Object o = itens.getItemAtPosition(position);
-                String nameBesta = o.toString();
-                nameBesta = nameBesta.replace(" ", "-").toLowerCase();
-                Intent it = new Intent(getApplicationContext(),BestiarioInfoActivity.class);
-                it.putExtra("besta",nameBesta);
-                startActivity(it);
-            }
-        });
     }
-
-    public void setListBestas(List<String> bestas){
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, bestas);
-        itens.setAdapter(adapter);
-    }
-
-
 
     class MinhaTarefa extends AsyncTask<String,Void,String> {
 
@@ -122,22 +114,36 @@ public class BestiarioActivity extends AppCompatActivity {
 
 
             //3. tratando dados json
-
-            JSONArray results = null;
-            List<String> bestas = new ArrayList<>();
+            String name = null;
+            String size = null;
+            String type = null;
+            String hit = null;
+            String armor = null;
+            String constitution = null;
+            String intelligence = null;
 
             try {
                 JSONObject jsonObject = new JSONObject(resultado);
-                results = jsonObject.getJSONArray("results");
-                for (int i=0; i < results.length(); i++) {
-                    JSONObject f = results.getJSONObject(i);
-                    bestas.add(f.getString("name"));
-                }
+
+                name = jsonObject.getString("name");
+                size = jsonObject.getString("size");
+                type = jsonObject.getString("type");
+                hit = jsonObject.getString("hit_points");
+                armor = jsonObject.getString("armor_class");
+                constitution = jsonObject.getString("constitution");
+                intelligence = jsonObject.getString("intelligence");
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            setListBestas(bestas);
+            infoName.setText(name);
+            infoSize.setText(size);
+            infoType.setText(type);
+            infoHit.setText(hit);
+            infoArmor.setText(armor);
+            infoConstitution.setText(constitution);
+            infoIntelligence.setText(intelligence);
         }
     }
 
