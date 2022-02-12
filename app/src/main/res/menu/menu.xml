@@ -16,6 +16,11 @@
         android:title="Dados"
         app:showAsAction="always"/>
     <item
+        android:id="@+id/anotacoes_item"
+        android:icon="@drawable/ic_notes"
+        android:title="Anotacoes"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/bestiario"
         android:icon="@drawable/bestiario_icon"
         android:title="Bestiário"

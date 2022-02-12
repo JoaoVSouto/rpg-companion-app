@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class AnotacoesDBHelper extends SQLiteOpenHelper {
     public static int VERSION = 1;
-    public static String DB_NAME = "db_rpg_companion";
+    public static String DB_NAME = "db_rpg_companion2";
     public static String TABELA_ANOTACOES = "anotacoes";
 
     public AnotacoesDBHelper(@Nullable Context context) {
@@ -20,7 +20,7 @@ public class AnotacoesDBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE IF NOT EXISTS " + TABELA_ANOTACOES +
                 "(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "titulo VARCHAR(64) NOT NULL," +
+                "titulo VARCHAR(30) NOT NULL," +
                 "anotacoes TEXT NOT NULL);";
 
         try {

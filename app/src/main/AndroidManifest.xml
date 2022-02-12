@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RPGCompanion">
         <activity
+            android:name=".AnotacaoAbertaActivity"
+            android:exported="false" />
+        <activity
             android:name=".AnotacoesAventuraActivity"
             android:exported="false" />
         <activity
