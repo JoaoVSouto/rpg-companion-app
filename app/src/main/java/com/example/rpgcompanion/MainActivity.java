@@ -83,6 +83,10 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
                 Intent it = new Intent(this,DadosActivity.class);
                 startActivity(it);
                 break;
+            case R.id.anotacoes_item:
+                Intent ait = new Intent(this,AnotacoesAventuraActivity.class);
+                startActivity(ait);
+                break;
             case R.id.acao_info:
                 InfoDialogFragment infoDialogFragment = new InfoDialogFragment();
                 infoDialogFragment.show(mFragmentManager,"INFO");
