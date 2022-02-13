@@ -79,8 +79,6 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
 
         createNotificationChannel();
 
-        Log.e(TAG, "onCreate");
-
         LongOperation lo = new LongOperation(this);
         lo.execute(curiosities);
 
@@ -219,16 +217,14 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
 
                 publishProgress(s);
 
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < params[0].length; i++) {
                     try {
-                        Thread.sleep((long) 36e+6); //(long) 36e+6 para notificações a cada 1h, 2000 para ver notificacoes mais rapido
+                        Thread.sleep(2000);
                     } catch (InterruptedException e) {
                         Thread.interrupted();
                     }
                 }
             }
-
-            doInBackground(params);
 
             return "Executed";
         }

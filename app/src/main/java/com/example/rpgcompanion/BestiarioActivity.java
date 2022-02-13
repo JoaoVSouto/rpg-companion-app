@@ -3,12 +3,16 @@ package com.example.rpgcompanion;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,12 +31,15 @@ import java.util.List;
 
 public class BestiarioActivity extends AppCompatActivity {
     ListView itens;
+    ProgressBar pbBestiario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bestiario);
         itens = findViewById(R.id.listaBestas);
+        pbBestiario = findViewById(R.id.pbBestiario);
+        pbBestiario.getIndeterminateDrawable().setColorFilter(Color.parseColor("#C84B31"), PorterDuff.Mode.MULTIPLY);
 
         MinhaTarefa tarefa = new MinhaTarefa();
         String urlApi = "https://www.dnd5eapi.co/api/monsters/";
@@ -62,11 +69,14 @@ public class BestiarioActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
+            Log.e("BEST", "PRE EXEC?");
             super.onPreExecute();
         }
 
         @Override
         protected String doInBackground(String... strings) {
+
+            Log.e("BEST", "Caindo aqui?");
 
             String stringUrl = strings[0];
             InputStream inputStream = null;
@@ -101,7 +111,7 @@ public class BestiarioActivity extends AppCompatActivity {
                     buffer.append(linha);
                 }
 
-
+                pbBestiario.setVisibility(View.INVISIBLE);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -113,12 +123,14 @@ public class BestiarioActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(Void... values) {
+            Log.e("BEST", "onProgressUpdate");
             super.onProgressUpdate(values);
         }
 
         @Override
         protected void onPostExecute(String resultado) {
             super.onPostExecute(resultado);
+            Log.e("BEST", "onProgressExecute");
 
 
             //3. tratando dados json
