@@ -4,13 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/drawable/ic_launcher_background.xml" value="0.36041666666666666" />
+        <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_anotacao_aberta.xml" value="0.34427083333333336" />
+        <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_anotacoes_aventura.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_bestiario.xml" value="0.19010416666666666" />
-        <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_bestiario_info.xml" value="0.19010416666666666" />
+        <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_bestiario_info.xml" value="0.67" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_criacao_ficha.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_dados.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_ficha_detalhe.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_home.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/activity_main.xml" value="0.3302083333333333" />
+        <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/fragment_anotacoes_lista.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/fragment_dado_dialog.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/fragment_ficha_detalhe.xml" value="0.34427083333333336" />
         <entry key="..\:/ASProjects/RPGCompanion/app/src/main/res/layout/fragment_ficha_lista.xml" value="0.34427083333333336" />

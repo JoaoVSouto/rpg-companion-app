@@ -28,7 +28,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name:"
+            android:text="Nome:"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Size:"
+            android:text="Tamanho:"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -68,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Type:"
+            android:text="Tipo:"
             android:textColor="@color/black"
             android:textSize="16sp" />
 
@@ -119,12 +119,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1">
+
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Armor:"
+                    android:text="Armadura:"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -152,12 +153,13 @@
                 android:orientation="vertical"
                 android:layout_weight="1"
                 android:layout_marginRight="24dp">
+
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Constitution:"
+                    android:text="Constituição:"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -178,12 +180,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_weight="1">
+
                 <TextView
                     android:id="@+id/textView14"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Intelligence:"
+                    android:text="Inteligência:"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 

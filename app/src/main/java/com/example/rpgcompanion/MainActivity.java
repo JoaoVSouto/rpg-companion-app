@@ -1,20 +1,19 @@
 package com.example.rpgcompanion;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.fragment.app.FragmentManager;
 
-import android.app.Activity;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -28,12 +27,12 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.rpgcompanion.dao.FichaDAO;
-import com.example.rpgcompanion.fragmentos.DadoDialogFragment;
-import com.example.rpgcompanion.fragmentos.FichaDetalheFragment;
 import com.example.rpgcompanion.fragmentos.FichaListaFragment;
 import com.example.rpgcompanion.fragmentos.InfoDialogFragment;
 import com.example.rpgcompanion.model.Ficha;
 import com.example.rpgcompanion.model.Notification;
+import com.example.rpgcompanion.utils.AnotacoesDBHelper;
+import com.example.rpgcompanion.utils.FichaDBHelper;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -60,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SQLiteDatabase bd = openOrCreateDatabase(FichaDBHelper.DB_NAME, MODE_PRIVATE, null);
+        new AnotacoesDBHelper(getApplicationContext()).onCreate(bd);
+        new FichaDBHelper(getApplicationContext()).onCreate(bd);
 
         mFragmentManager = getSupportFragmentManager();
 

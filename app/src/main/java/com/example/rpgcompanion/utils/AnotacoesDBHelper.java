@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class AnotacoesDBHelper extends SQLiteOpenHelper {
     public static int VERSION = 1;
-    public static String DB_NAME = "db_rpg_companion2";
+    public static String DB_NAME = "db_rpg_companion";
     public static String TABELA_ANOTACOES = "anotacoes";
 
     public AnotacoesDBHelper(@Nullable Context context) {
@@ -25,9 +25,9 @@ public class AnotacoesDBHelper extends SQLiteOpenHelper {
 
         try {
             db.execSQL(sql);
-            Log.i("INFO DB", "Sucesso ao criar a tabela!");
+            Log.i("INFO DB ANOTACOES", "Sucesso ao criar a tabela!");
         } catch (Exception e) {
-            Log.i("INFO DB", "Erro ao criar tabela...");
+            Log.i("INFO DB ANOTACOES", "Erro ao criar tabela...");
         }
     }
 
