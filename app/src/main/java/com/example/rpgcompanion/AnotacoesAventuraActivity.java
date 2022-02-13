@@ -2,6 +2,8 @@ package com.example.rpgcompanion;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.DialogInterface;
@@ -14,10 +16,12 @@ import com.example.rpgcompanion.dao.AnotacaoDAO;
 import com.example.rpgcompanion.fragmentos.AnotacoesListaFragment;
 import com.example.rpgcompanion.model.Anotacao;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 public class AnotacoesAventuraActivity extends AppCompatActivity implements AnotacoesListaFragment.AoClicarNaAnotacao{
 
     FloatingActionButton fabAdd;
+    ConstraintLayout constraintLayout;
 
     private FragmentManager mFragmentManager;
     private AnotacoesListaFragment anotacoesListaFragment;
@@ -27,7 +31,7 @@ public class AnotacoesAventuraActivity extends AppCompatActivity implements Anot
         setContentView(R.layout.activity_anotacoes_aventura);
         mFragmentManager = getSupportFragmentManager();
         anotacoesListaFragment = (AnotacoesListaFragment) mFragmentManager.findFragmentById(R.id.fragmentAnotacoesLista);
-
+        constraintLayout = findViewById(R.id.coordinatorLayout);
         fabAdd = findViewById(R.id.fabAdd);
         fabAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,10 +68,12 @@ public class AnotacoesAventuraActivity extends AppCompatActivity implements Anot
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 if(new AnotacaoDAO(getApplicationContext()).delete(anotacao)){
-                    Toast.makeText(getApplicationContext(), "Anotação foi removida", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(constraintLayout, "Anotação foi removida", Snackbar.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Anotação foi removida", Toast.LENGTH_SHORT).show();
                     carregarAnotacoes();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Erro ao deletar anotação", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(constraintLayout, "Erro ao deletar anotação", Snackbar.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Erro ao deletar anotação", Toast.LENGTH_SHORT).show();
                 }
             }
         });
