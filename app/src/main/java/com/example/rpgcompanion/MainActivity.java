@@ -33,6 +33,7 @@ import com.example.rpgcompanion.fragmentos.FichaDetalheFragment;
 import com.example.rpgcompanion.fragmentos.FichaListaFragment;
 import com.example.rpgcompanion.fragmentos.InfoDialogFragment;
 import com.example.rpgcompanion.model.Ficha;
+import com.example.rpgcompanion.model.Notification;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -45,6 +46,15 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
 
     private static final String CHANNEL_ID = "CHANNEL_ID";
     private static final String TAG = "main";
+    private static final Notification[] curiosities = {
+        new Notification("História", "A primeira edição do D&D foi lançada em 1974!"),
+        new Notification("Explore o jogo", "Ao menos 7 tipos de dados são necessários para a partida"),
+        new Notification("Explore o jogo", "Existem mais de 9 mundos para se explorar no D&D"),
+        new Notification("Explore o jogo", "Escolha dentre entre mais de 5 raças e classes e monte seu personagem!"),
+        new Notification("Entenda as raças", "Elfos são um povo mágico de graça sobrenatural, vivendo no mundo, mas não inteiramente parte dele."),
+        new Notification("Entenda as raças", "Os anões são sólidos e duradouros como as montanhas que amam, resistindo à passagem dos séculos com resistência estóica e poucas mudanças."),
+        new Notification("Entenda as raças", "Os gnomos se deleitam com a vida, aproveitando cada momento de invenção, exploração, investigação, criação e jogo.")
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
         Log.e(TAG, "onCreate");
 
         LongOperation lo = new LongOperation(this);
-        lo.execute("Curiosidade 1", "Curiosidade 2", "Curiosidade 3", "Curiosidade 4 ", "Curiosidade 5");
+        lo.execute(curiosities);
 
     }
 
@@ -189,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
         }
     }
 
-    private class LongOperation extends AsyncTask<String, String, String> {
+    private class LongOperation extends AsyncTask<Notification[], Notification, String> {
 
         private static final String TAG = "longoperation";
         private Context ctx;
@@ -200,9 +210,9 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
         }
 
         @Override
-        protected String doInBackground(String... params) {
-            for (String s : params) {
-                Log.e(TAG, s);
+        protected String doInBackground(Notification[]... params) {
+            for (Notification s : params[0]) {
+                Log.e(TAG, s.toString());
 
                 publishProgress(s);
 
@@ -214,21 +224,25 @@ public class MainActivity extends AppCompatActivity implements FichaListaFragmen
                     }
                 }
             }
+
+            doInBackground(params);
+
             return "Executed";
         }
 
         @Override
-        protected void onProgressUpdate(String... values) {
-            for (String title: values) {
-                sendNotification(title, notificationId.incrementAndGet());
-            }
+        protected void onProgressUpdate(Notification... values) {
+            sendNotification(values[0], notificationId.incrementAndGet());
         }
 
-        void sendNotification(String title, int notificationId) {
+        void sendNotification(Notification notification, int notificationId) {
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(ctx,CHANNEL_ID)
-                    .setContentTitle(String.format("%s ", title))
-                    .setContentText("TUDO O QUE VOCÊ PRECISA SABER SOBRE RPG")
+                    .setContentTitle("Nova curiosidade sobre o mundo RPG!")
+                    .setContentText(notification.getTheme())
+                    .setStyle(
+                        new NotificationCompat.BigTextStyle().bigText(notification.getDescription())
+                    )
                     .setPriority(NotificationCompat.PRIORITY_HIGH)
                     .setAutoCancel(true)
                     .setSmallIcon(R.drawable.ic_launcher_foreground);
